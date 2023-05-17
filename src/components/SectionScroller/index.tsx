@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import classNames from "classnames";
+import Image from "next/image";
 
 
 export default function SectionScroller() {
@@ -60,45 +61,45 @@ export default function SectionScroller() {
                 <div className={classNames("featureImageWrapper absolute top-0 left-0 w-full h-full",
                 current === 0 ? "opacity-100 z-10" : "opacity-0 z-0"
                 )}>
-                  <div className="h-full">
-                    <img className="object-cover h-full w-full" src={`./image1.webp`} alt="Image 1" />
+                  <div className="w-full h-full">
+                    <Image loader={imageLoader} fill className="object-cover h-full w-full" src={`./image1.webp`} alt="Image 1" />
                   </div>
                 </div>
 
                 <div className={classNames("featureImageWrapper absolute top-0 left-0 w-full h-full",
                 current === 1 ? "opacity-100 z-10" : "opacity-0 z-0"
                 )}>
-                  <div className="h-full">
-                    <img className="object-cover h-full w-full" src={`./image2.png`} alt="Image 1" />
+                  <div className="w-full h-full">
+                    <Image loader={imageLoader} fill className="object-cover h-full w-full" src={`./image2.png`} alt="Image 1" />
                   </div>
                 </div>
 
                 <div className={classNames("featureImageWrapper absolute top-0 left-0 w-full h-full",
                 current === 2 ? "opacity-100 z-10" : "opacity-0 z-0"
                 )}>
-                  <div className="h-full">
-                    <img className="object-cover h-full w-full" src={`./image3.png`} alt="Image 1" />
+                  <div className="w-full h-full">
+                    <Image loader={imageLoader} fill className="object-cover h-full w-full" src={`./image3.png`} alt="Image 1" />
                   </div>
                 </div>
 
                 <div className={classNames("featureImageWrapper absolute top-0 left-0 w-full h-full",
                 current === 3 ? "opacity-100 z-10" : "opacity-0 z-0"
                 )}>
-                  <div className="h-full">
-                    <img className="object-cover h-full w-full" src={`./image4.png`} alt="Image 1" />
+                  <div className="w-full h-full">
+                    <Image loader={imageLoader} fill className="object-cover h-full w-full" src={`./image4.png`} alt="Image 1" />
                   </div>
                 </div>
 
                 <div className={classNames("featureImageWrapper absolute top-0 left-0 w-full h-full",
                 current === 4 ? "opacity-100 z-10" : "opacity-0 z-0"
                 )}>
-                  <div className="h-full">
-                    <img className="object-cover h-full w-full" src={`./image5.png`} alt="Image 1" />
+                  <div className="w-full h-full">
+                    <Image loader={imageLoader} fill className="object-cover h-full w-full" src={`./image5.png`} alt="Image 1" />
                   </div>
                 </div>
               </div>
             </div>
-            
+
             <ul className={classNames("scroll-wrapper flex-1 middle-cont-list",
             "flex flex-col gap-8"
             )}>
@@ -187,3 +188,8 @@ export default function SectionScroller() {
     </div>
   );
 }
+
+
+const imageLoader = ({ src}: any) => {
+  return src;
+};

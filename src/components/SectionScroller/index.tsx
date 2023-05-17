@@ -31,6 +31,7 @@ export default function SectionScroller() {
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
+      console.log("scrollY", scrollY);
 
       const element = divRef.current;
 
@@ -49,10 +50,30 @@ export default function SectionScroller() {
     };
   }, []);
 
+
+  const handleCurrent = (e, index) => {
+    setCurrent(index);
+    let clickedElememt = e.target;
+    let clickedElememtId = clickedElememt.getAttribute("id")
+
+    // console.log(clickedElememtId);
+    // let elementTop = divRef.current.offsetTop;
+    // let clickedElememtTop = clickedElememt.getBoundingClientRect().top;
+    // let totalTop = Math.round(elementTop + clickedElememtTop);
+    // console.log(elementTop,  clickedElememt.getBoundingClientRect().top, totalTop);
+  
+    // console.log(clickedElememt.offsetHeight, clickedElememt.offsetTop);
+    // window.scrollTo(0, totalTop);
+    // window.scrollTo(0, totalTop);
+  }
+
+
+
+
   return (
     <div>
       <div style={{ height: "100vh", backgroundColor: "lightblue" }}></div>
-      <div ref={divRef} className={classNames("scrollParent min-h-[500vh] relative w-full h-full bg-gray-400")}>
+      <div ref={divRef} className={classNames("scrollParent min-h-[550vh] relative w-full h-full bg-gray-400")}>
         <div
           className={classNames("w-[90%] mx-auto h-[88vh] sticky top-[15%] flex gap-10 items-center justify-center")}
         >
@@ -105,7 +126,8 @@ export default function SectionScroller() {
             )}>
              <li>
               <h4 className="text-3xl text-blue-500 cursor-pointer"
-              onClick={() => setCurrent(0)}
+              id="element1"
+              onClick={(e) => handleCurrent(e, 0)}
               >Self-install and activation</h4>
               <p className={classNames(
                 current === 0 ? "max-h-full opacity-100": "overflow-hidden max-h-0 opacity-0",
@@ -121,7 +143,8 @@ export default function SectionScroller() {
 
             <li>
               <h4 className="text-3xl text-blue-500 cursor-pointer"
-              onClick={() => setCurrent(1)}
+              id="element2"
+              onClick={(e) => handleCurrent(e, 1)}
               >Easy and automated administration</h4>
               <p className={classNames(
                 current === 1 ? "max-h-full opacity-100": "overflow-hidden max-h-0 opacity-0",
@@ -137,7 +160,8 @@ export default function SectionScroller() {
 
             <li>
               <h4 className="text-3xl text-blue-500 cursor-pointer"
-              onClick={() => setCurrent(2)}
+              id="element3"
+              onClick={(e) => handleCurrent(e, 2)}
               >Intuitive remote management and reporting</h4>
               <p className={classNames(
                 current === 2 ? "max-h-full opacity-100": "overflow-hidden max-h-0 opacity-0",
@@ -152,7 +176,8 @@ export default function SectionScroller() {
 
             <li>
               <h4 className="text-3xl text-blue-500 cursor-pointer"
-              onClick={() => setCurrent(3)}
+              id="element4"
+              onClick={(e) => handleCurrent(e, 3)}
               >Easy no-code/low-code integrations</h4>
               <p className={classNames(
                 current === 3 ? "max-h-full opacity-100": "overflow-hidden max-h-0 opacity-0",
@@ -168,7 +193,8 @@ export default function SectionScroller() {
 
             <li>
               <h4 className="text-3xl text-blue-500 cursor-pointer"
-              onClick={() => setCurrent(4)}
+              id="element5"
+              onClick={(e) => handleCurrent(e, 4)}
               >Physical Identity and Access Management</h4>
               <p className={classNames(
                 current === 4 ? "max-h-full opacity-100": "overflow-hidden max-h-0 opacity-0",

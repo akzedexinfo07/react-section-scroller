@@ -1,13 +1,13 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState} from "react";
 import classNames from "classnames";
 import Image from "next/image";
 
 
 export default function SectionScroller() {
   const divRef = useRef<any>(null);
+  const pointersRef = useRef<any>(null);
   const [scrollPercent, setScrollPercent] = useState(0);
   const [current, setCurrent] = useState(0)
-
 
   useMemo(() => {
     if (scrollPercent < 20) {
@@ -29,20 +29,6 @@ export default function SectionScroller() {
   }, [scrollPercent]);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY;
-      console.log("scrollY", scrollY);
-
-      const element = divRef.current;
-
-      if (element && scrollY - element.offsetTop > 0) {
-        const scrolledHeight = scrollY - element.offsetTop;
-        const totalHeight = element.offsetHeight;
-
-        setScrollPercent((scrolledHeight / totalHeight) * 100);
-      }
-    };
-
     window.addEventListener("scroll", handleScroll);
 
     return () => {
@@ -50,25 +36,36 @@ export default function SectionScroller() {
     };
   }, []);
 
+  const handleScroll = () => {
+    const scrollY = window.scrollY;
+    console.log("scrollY", scrollY);
+
+    const element = divRef.current;
+
+    if (element && scrollY - element.offsetTop > 0) {
+      const scrolledHeight = scrollY - element.offsetTop;
+      const totalHeight = element.offsetHeight;
+
+      setScrollPercent((scrolledHeight / totalHeight) * 100);
+    }
+  };
 
   const handleCurrent = (e, index) => {
     setCurrent(index);
     let clickedElememt = e.target;
+    // console.log(clickedElememt.index());
     let clickedElememtId = clickedElememt.getAttribute("id")
-
-    // console.log(clickedElememtId);
-    // let elementTop = divRef.current.offsetTop;
-    // let clickedElememtTop = clickedElememt.getBoundingClientRect().top;
-    // let totalTop = Math.round(elementTop + clickedElememtTop);
-    // console.log(elementTop,  clickedElememt.getBoundingClientRect().top, totalTop);
   
-    // console.log(clickedElememt.offsetHeight, clickedElememt.offsetTop);
-    // window.scrollTo(0, totalTop);
+    console.log(Array.from(pointersRef.current.children))
+
+    let elementTop = divRef.current.offsetTop;
+    let clickedElememtTop = clickedElememt.getBoundingClientRect().top;
+    let totalTop = Math.round(elementTop + clickedElememtTop);
+
+    console.log("OFFSET TOP", clickedElememt.getBoundingClientRect().top, clickedElememt.offsetTop);
+    
     // window.scrollTo(0, totalTop);
   }
-
-
-
 
   return (
     <div>
@@ -123,7 +120,9 @@ export default function SectionScroller() {
 
             <ul className={classNames("scroll-wrapper flex-1 middle-cont-list",
             "flex flex-col gap-8"
-            )}>
+            )}
+            ref={pointersRef}
+            >
              <li>
               <h4 className="text-3xl text-blue-500 cursor-pointer"
               id="element1"
@@ -134,7 +133,8 @@ export default function SectionScroller() {
                 "text-xl",
                 "transitionEffect",
                 "mt-3"
-              )}>
+              )}
+              >
                 Activate the OLOID M-Tag with a few taps on the admin app.
                 Invite employees by reusing existing badge credentials or issue
                 new ones within minutes.
